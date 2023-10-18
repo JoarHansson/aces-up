@@ -2,26 +2,28 @@
 
 declare(strict_types=1);
 
-echo "<pre>";
+require __DIR__ . "/header.php";
+require __DIR__ . "/functions.php";
+
 
 $suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 $values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 $deck = [];
 
-// construct the deck of cards and shuffle it:
+// construct deck of cards, add unicodes to each card and shuffle the deck:
 foreach ($suits as $suit) {
 
   foreach ($values as $key => $value) {
     $deck[] = [
       "suit" => $suit,
       "value" => $value,
-      "unicodes" =>
+      "unicode" =>
       "U+1F0" . chr(65 + array_search($suit, $suits)) .
         base_convert(strval(array_keys($values)[$key] + 1), 10, 16)
     ];
 
     /*
-    Value for key ($deck[x]["unicodes"] explained:
+    Value for key ($deck[x]["unicode"] explained:
     chr(65 + array_search($suit, $suits)) == A,B,C or D.
     array_keys($values)[$key] == a number, 0 to 12.
       1 is then added because the unicode indexes start at 1, not 0.
@@ -34,17 +36,13 @@ foreach ($suits as $suit) {
 }
 shuffle($deck);
 
-// print unicode card:
-$unicodeCard = base_convert("U+1F0A2", 16, 10);
-print_r(mb_chr(intval($unicodeCard), 'UTF-8') . "\n");
+dealCards($deck, $handOfCards);
 
+echo "<pre>";
+var_dump($handOfCards);
+var_dump($deck);
+?>
 
-// deal a hand of 4 cards:
-$handOfCards = [];
+</body>
 
-function dealCards(array &$deck, array &$handOfCards)
-{
-  $handOfCards = array_splice($deck, 0, 4);
-}
-print_r($deck);
-print_r($handOfCards);
+</html>
