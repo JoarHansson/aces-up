@@ -13,9 +13,14 @@ function dealCards(array &$deck, array &$handOfCards)
   foreach ($handOfCards as $card) :
     $unicodeConverted = base_convert($card["unicode"], 16, 10); ?>
 
-    <span class="card">
-      <?= mb_chr(intval($unicodeConverted), 'UTF-8'); ?>
-    </span>
-
+    <?php if ($card["suit"] === "Hearts" || $card["suit"] === "Diamonds") : ?>
+      <span class="card font-red">
+        <?= mb_chr(intval($unicodeConverted), 'UTF-8'); ?>
+      </span>
+    <?php elseif ($card["suit"] === "Spades" || $card["suit"] === "Clubs") : ?>
+      <span class="card font-black">
+        <?= mb_chr(intval($unicodeConverted), 'UTF-8'); ?>
+      </span>
+    <?php endif; ?>
   <?php endforeach; ?>
 <?php }

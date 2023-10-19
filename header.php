@@ -9,6 +9,14 @@
     .card {
       font-size: 10rem;
     }
+
+    .font-black {
+      color: black;
+    }
+
+    .font-red {
+      color: red;
+    }
   </style>
 </head>
 
