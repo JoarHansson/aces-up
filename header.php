@@ -12,6 +12,9 @@
 
     .card {
       font-size: 10rem;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     .font-black {
@@ -20,6 +23,10 @@
 
     .font-red {
       color: darkred;
+    }
+
+    .inline-form {
+      display: inline;
     }
   </style>
 </head>
